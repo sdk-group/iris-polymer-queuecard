@@ -25,13 +25,14 @@
       <paper-dialog id="dialog">
         <div>
           <paper-dialog-scrollable>
-            <paper-listbox class="queue-list">
+            <paper-listbox id="list">
               <paper-item class="field-names">Field names</paper-item>
               <template is="dom-repeat" items="{{queue_items}}" as="item">
-                <paper-item>Item 1</paper-item>
+                <paper-item on-tap="expandItem">Item 1</paper-item>
               </template>
             </paper-listbox>
           </paper-dialog-scrollable>
+
           <div class="buttons">
             <paper-button dialog-dismiss>Закрыть</paper-button>
           </div>
@@ -50,12 +51,24 @@
           api: Object,
           appState: Object,
           heading: String,
-          listCount: Number
+          listCount: Number,
+          listName: String,
         },
         ready() {
 
         },
         openList() {
+          let queue = this.api.require('queue');
+          let from = 0;
+          let to = from + this.listCount;
+          queue.listTickets(this.listName, from, to).then((result) => {
+            this.queue_length = result.queue_length;
+            this.queue_items = result.items;
+          });
+        },
+        expandItem() {
+          //@TODO: load history, etc.
+          let selected = this.$.list.selected;
 
         }
       });
