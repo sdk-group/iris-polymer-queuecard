@@ -1,0 +1,65 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iris-polymer-importer/iris-importer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+
+<dom-module id="iris-queuelist">
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <paper-card heading$="{{heading}}">
+      <div class="card-content">
+        <div class="counter">
+          <content selector=".items-counter"></content>
+        </div>
+        <paper-button on-click="openList">
+          <content class=".button-name"></content>
+        </paper-button>
+      </div>
+      <paper-dialog id="dialog">
+        <div>
+          <paper-dialog-scrollable>
+            <paper-listbox class="queue-list">
+              <paper-item class="field-names">Field names</paper-item>
+              <template is="dom-repeat" items="{{queue_items}}" as="item">
+                <paper-item>Item 1</paper-item>
+              </template>
+            </paper-listbox>
+          </paper-dialog-scrollable>
+          <div class="buttons">
+            <paper-button dialog-dismiss>Закрыть</paper-button>
+          </div>
+        </div>
+      </paper-dialog>
+    </paper-card>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+      Polymer({
+        is: 'iris-queuelist',
+        properties: {
+          api: Object,
+          appState: Object,
+          heading: String,
+          listCount: Number
+        },
+        ready() {
+
+        },
+        openList() {
+
+        }
+      });
+    })();
+  </script>
+
+</dom-module>

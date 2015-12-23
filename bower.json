@@ -1,0 +1,18 @@
+{
+  "name": "iris-polymer-queuelist",
+  "homepage": "https://github.com/sdk-group/iris-polymer-queuelist",
+  "authors": [
+    "artificial-life <proteus.protocol@gmail.com>"
+  ],
+  "description": "",
+  "main": "iris-queuelist.html",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
