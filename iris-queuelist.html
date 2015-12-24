@@ -26,9 +26,29 @@
         <div>
           <paper-dialog-scrollable>
             <paper-listbox id="list">
-              <paper-item class="field-names">Field names</paper-item>
+              <paper-item class="field-names">
+                <template is="dom-if" if="{{hasActions}}">
+                  <span>Действие</span>
+                </template>
+
+                <span>№ талона</span>
+                <span>Услуга</span>
+                <span>Число дел</span>
+                <span>ФИО</span>
+                <span>Время ожидания</span>
+              </paper-item>
               <template is="dom-repeat" items="{{queue_items}}" as="item">
-                <paper-item on-tap="expandItem">Item 1</paper-item>
+                <paper-item on-tap="expandItem">
+                  <template is="dom-if" if="{{hasActions}}">
+                    <paper-button on-tap="ticketAction">Принять</paper-button>
+                  </template>
+
+                  <span>[[item.number]]</span>
+                  <span>[[item.service]]</span>
+                  <span>[[item.serices_count]]</span>
+                  <span>{{computeName(item.fields)}}</span>
+                  <span>{{computeWaitingTime(item.time_bounds)}}</span>
+                </paper-item>
               </template>
             </paper-listbox>
           </paper-dialog-scrollable>
@@ -53,6 +73,12 @@
           heading: String,
           listCount: Number,
           listName: String,
+          hasActions: {
+            type: Boolean,
+            value: function() {
+              return false;
+            }
+          }
         },
         ready() {
 
@@ -69,6 +95,18 @@
         expandItem() {
           //@TODO: load history, etc.
           let selected = this.$.list.selected;
+
+        },
+        ticketAction() {
+          let selected = this.$.list.selected;
+        },
+        computeName(fields) {
+          let name = fields.name[0] + '.';
+          let lastname = fields.lastname;
+          let patronymic = fields.patronymic ? fields.patronymic[0] + '.' : '';
+          return `${lastname} ${name} ${patronymic}`;
+        },
+        computeWaitingTime(time_bounds) {
 
         }
       });
