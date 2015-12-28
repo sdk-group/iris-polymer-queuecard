@@ -7,6 +7,8 @@
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 
+<link rel="import" href="test/test-data.html">
+
 <dom-module id="iris-queuecard">
   <template>
     <style include="shared-styles"></style>
@@ -83,54 +85,7 @@
           // });
           let queue_length = 5;
 
-          let queue_items = [{
-            number: "П-231",
-            service: "Test service",
-            service_count: 1,
-            fields: {
-              name: 'My',
-              lastname: 'Lastname'
-            },
-            time_bounds: {
-              start: Date.now() - 30 * 1000
-            }
-          }, {
-            number: "П-231",
-            service: "Test service",
-            service_count: 1,
-            fields: {
-              name: 'My',
-              lastname: 'Lastname'
-            },
-            time_bounds: {
-              start: Date.now() - 60 * 1000
-            }
-
-          }, {
-            number: "П-231",
-            service: "Test service",
-            service_count: 1,
-            fields: {
-              name: 'My',
-              lastname: 'Lastname'
-            },
-            time_bounds: {
-              start: Date.now() - 90 * 1000
-            }
-          }, {
-            number: "П-231",
-            service: "Test service",
-            service_count: 1,
-            fields: {
-              name: 'My',
-              lastname: 'Lastname'
-            },
-            time_bounds: {
-              start: Date.now() - 120 * 1000
-            }
-          }];
-          this.$.dialog.tickets = queue_items;
-
+          this.$.dialog.tickets = test_data.queue_items;
           this.$.dialog.open();
         },
         closeList() {
