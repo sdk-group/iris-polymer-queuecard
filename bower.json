@@ -1,11 +1,11 @@
 {
-  "name": "iris-polymer-queuelist",
-  "homepage": "https://github.com/sdk-group/iris-polymer-queuelist",
+  "name": "iris-polymer-queuecard",
+  "homepage": "https://github.com/sdk-group/iris-polymer-queuecard",
   "authors": [
     "artificial-life <proteus.protocol@gmail.com>"
   ],
   "description": "",
-  "main": "iris-queuelist.html",
+  "main": "iris-queuecard.html",
   "moduleType": [],
   "license": "MIT",
   "ignore": [

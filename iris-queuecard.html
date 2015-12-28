@@ -1,0 +1,143 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iris-polymer-importer/iris-importer.html">
+<link rel="import" href="../../bower_components/iris-polymer-ticketlist/iris-ticketlist.html">
+
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<dom-module id="iris-queuecard">
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: inline-block;
+        --paper-card-header-color: #702c0c;
+      }
+      
+      .card-content paper-button {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        font-size: 12px;
+        margin: 0;
+        clear: both;
+        float: right;
+        font-weight: 600;
+        color: #fafafa;
+        @applay(--shadow-none);
+        width: 100%;
+      }
+      
+      paper-card {
+        --paper-card-content: {
+          padding: 0;
+          padding-top: 16px;
+        }
+      }
+      
+      .counter {
+        float: right;
+        clear: both;
+      }
+    </style>
+    <paper-card heading$="{{heading}}">
+      <div class="card-content">
+        <div class="counter">
+          <content select=".items-counter"></content>
+        </div>
+        <paper-button class="btn-primary" on-click="openList" raised elevation="0">
+          <content select=".button-name"></content>
+        </paper-button>
+      </div>
+      <iris-ticketlist id="dialog"></iris-ticketlist>
+    </paper-card>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+      Polymer({
+        is: 'iris-queuecard',
+        properties: {
+          api: Object,
+          appState: Object,
+          heading: String,
+          listCount: Number,
+          listName: String,
+          hasActions: {
+            type: Boolean,
+            value: function() {
+              return false;
+            }
+          }
+        },
+        openList() {
+          let queue = this.api.require('queue');
+          // let from = 0;
+          // let to = from + this.listCount;
+          // queue.listTickets(this.listName, from, to).then((result) => {
+          //   this.queue_length = result.queue_length;
+          //   this.queue_items = result.items;
+          // });
+          let queue_length = 5;
+
+          let queue_items = [{
+            number: "П-231",
+            service: "Test service",
+            service_count: 1,
+            fields: {
+              name: 'My',
+              lastname: 'Lastname'
+            },
+            time_bounds: {
+              start: Date.now() - 30 * 1000
+            }
+          }, {
+            number: "П-231",
+            service: "Test service",
+            service_count: 1,
+            fields: {
+              name: 'My',
+              lastname: 'Lastname'
+            },
+            time_bounds: {
+              start: Date.now() - 60 * 1000
+            }
+
+          }, {
+            number: "П-231",
+            service: "Test service",
+            service_count: 1,
+            fields: {
+              name: 'My',
+              lastname: 'Lastname'
+            },
+            time_bounds: {
+              start: Date.now() - 90 * 1000
+            }
+          }, {
+            number: "П-231",
+            service: "Test service",
+            service_count: 1,
+            fields: {
+              name: 'My',
+              lastname: 'Lastname'
+            },
+            time_bounds: {
+              start: Date.now() - 120 * 1000
+            }
+          }];
+          this.$.dialog.tickets = queue_items;
+
+          this.$.dialog.open();
+        },
+        closeList() {
+          this.$.dialog.close();
+        }
+      });
+    })();
+  </script>
+
+</dom-module>

@@ -1,2 +1,2 @@
-# iris-polymer-queuelist
+# iris-polymer-queuecard
 ticket list
