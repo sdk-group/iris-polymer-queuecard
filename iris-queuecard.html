@@ -2,7 +2,8 @@
 <link rel="import" href="../../bower_components/iris-polymer-importer/iris-importer.html">
 <link rel="import" href="../../bower_components/iris-polymer-ticketlist/iris-ticketlist.html">
 
-
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
@@ -32,6 +33,7 @@
       }
       
       paper-card {
+        width: 100%;
         --paper-card-content: {
           padding: 0;
           padding-top: 16px;
@@ -42,7 +44,35 @@
         float: right;
         clear: both;
       }
+      
+      #dialog {
+        width: 100%;
+        top: 64px;
+        bottom: 0px;
+        margin: 0;
+        border-top: 3px solid #E44E34;
+      }
+      
+      .dialog-head {
+        text-align: left;
+        font-size: 19px;
+        padding-left: 15px;
+        position: relative;
+        margin-top: 10px;
+      }
+      
+      paper-fab {
+        border-radius: 3px;
+        background-color: rgba(0, 0, 0, 0.0);
+        border: 3px solid #6E4D44;
+        color: #6E4D44;
+      }
+      
+      paper-fab.flat {
+        @applay(--shadow-none);
+      }
     </style>
+
     <paper-card heading$="{{heading}}">
       <div class="card-content">
         <div class="counter">
@@ -52,8 +82,16 @@
           <content select=".button-name"></content>
         </paper-button>
       </div>
-      <iris-ticketlist id="dialog"></iris-ticketlist>
     </paper-card>
+
+    <paper-dialog id="dialog" entry-animation="slide-from-left-animation" exit-animation="slide-left-animation">
+      <div class='dialog-head'>
+        <paper-fab class="flat" mini icon="chevron-left" elevation="0" on-click="closeList"> </paper-fab>
+      </div>
+      <paper-dialog-scrollable>
+        <iris-ticketlist id='ticketlist'></iris-ticketlist>
+      </paper-dialog-scrollable>
+    </paper-dialog>
 
   </template>
 
@@ -75,6 +113,9 @@
             }
           }
         },
+        ready() {
+          this.$.dialog.sizingTarget = app;
+        },
         openList() {
           let queue = this.api.require('queue');
           // let from = 0;
@@ -85,7 +126,7 @@
           // });
           let queue_length = 5;
 
-          this.$.dialog.tickets = test_data.queue_items;
+          this.$.ticketlist.tickets = test_data.queue_items;
           this.$.dialog.open();
         },
         closeList() {
