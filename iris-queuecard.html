@@ -92,7 +92,7 @@
         <paper-fab class="flat" mini icon="chevron-left" elevation="0" on-click="closeList"> </paper-fab>
       </div>
       <paper-dialog-scrollable>
-        <iris-ticketlist id='ticketlist'></iris-ticketlist>
+        <iris-ticketlist id='ticketlist' tickets="{{tickets}}"></iris-ticketlist>
       </paper-dialog-scrollable>
     </paper-dialog>
 
@@ -104,33 +104,15 @@
       Polymer({
         is: 'iris-queuecard',
         properties: {
-          appState: Object,
           heading: String,
-          listCount: Number,
-          listName: String,
-          hasActions: {
-            type: Boolean,
-            value: function() {
-              return false;
-            }
-          }
+          tickets: Array
         },
         ready() {
           this.$.dialog.sizingTarget = app;
         },
         openList() {
-          let api = this.$.meta.byKey('api');
-          let queue = api.require('queue');
-
-          // let from = 0;
-          // let to = from + this.listCount;
-          // queue.listTickets(this.listName, from, to).then((result) => {
-          //   this.queue_length = result.queue_length;
-          //   this.queue_items = result.items;
-          // });
-          let queue_length = 5;
-
-          this.$.ticketlist.tickets = test_data.queue_items;
+          //this.$.ticketlist.tickets = this.tickets;
+          app.scrollPageToTop();
           this.$.dialog.open();
         },
         closeList() {
