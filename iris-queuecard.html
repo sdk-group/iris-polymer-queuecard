@@ -7,7 +7,6 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/iron-meta/iron-meta.html">
 
 <dom-module id="iris-queuecard">
   <template>
@@ -73,8 +72,6 @@
       }
     </style>
 
-    <iron-meta id="meta"></iron-meta>
-
     <paper-card heading$="{{heading}}">
       <div class="card-content">
         <div class="counter">
@@ -110,7 +107,7 @@
           this.$.dialog.sizingTarget = app;
         },
         openList() {
-          //this.$.ticketlist.tickets = this.tickets;
+          this.$.ticketlist.tickets = this.tickets;
           app.scrollPageToTop();
           this.$.dialog.open();
         },
