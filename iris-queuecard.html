@@ -88,7 +88,7 @@
         <paper-fab class="flat" mini icon="chevron-left" elevation="0" on-click="closeList"> </paper-fab>
       </div>
       <paper-dialog-scrollable>
-        <iris-ticketlist id='ticketlist' tickets="{{tickets}}"></iris-ticketlist>
+        <iris-ticketlist id='ticketlist' tickets="[[tickets]]" row-model="[[row_model]]" on-ticket-action="closeList"></iris-ticketlist>
       </paper-dialog-scrollable>
     </paper-dialog>
 
@@ -104,10 +104,41 @@
           tickets: Array
         },
         ready() {
+          this.row_model = [{
+            label: "Действие",
+            caption: "Принять",
+            name: 'process',
+            transform: 'action'
+          }, {
+            label: "№ талона",
+            field: 'label'
+          }, {
+            label: 'Услуга',
+            field: 'service'
+          }, {
+            label: 'Число дел',
+            field: 'service_count'
+          }, {
+            label: 'ФИО',
+            field: ['name', 'lastname', 'patronymic'],
+            transform: function(ticket) {
+              let client = ticket.client;
+
+              let name = client.name[0] + '.';
+              let lastname = client.lastname;
+              let middlename = client.middlename ? client.middlename[0] + '.' : '';
+              return `${lastname} ${name} ${middlename}`;
+            }
+          }, {
+            label: 'Время ожидаения',
+            field: ['booking_date'],
+            transform: 'doomclock'
+          }];
+
           this.$.dialog.sizingTarget = app;
         },
         openList() {
-          this.$.ticketlist.tickets = this.tickets;
+          //this.$.ticketlist.tickets = this.tickets;
           app.scrollPageToTop();
           this.$.dialog.open();
         },
