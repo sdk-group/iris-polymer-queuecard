@@ -71,7 +71,7 @@
         @applay(--shadow-none);
       }
     </style>
-
+    <iris-api-controller id="api"></iris-api-controller>
     <paper-card heading$="{{heading}}">
       <div class="card-content">
         <div class="counter">
@@ -114,23 +114,22 @@
             field: 'label'
           }, {
             label: 'Услуга',
-            field: 'service'
+            field: 'service',
+            transform: (ticket) => {
+              let service_id = ticket.service;
+              return this.$.api.require('services').getService(service_id).service_label;
+            }
           }, {
             label: 'Число дел',
             field: 'service_count'
           }, {
             label: 'ФИО',
-            field: ['name', 'lastname', 'patronymic'],
+            field: 'fio',
             transform: function(ticket) {
-              let client = ticket.client;
-
-              let name = client.name[0] + '.';
-              let lastname = client.lastname;
-              let middlename = client.middlename ? client.middlename[0] + '.' : '';
-              return `${lastname} ${name} ${middlename}`;
+              return ticket.client.fio;
             }
           }, {
-            label: 'Время ожидаения',
+            label: 'Время ожидания',
             field: ['booking_date'],
             transform: 'doomclock'
           }];
