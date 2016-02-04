@@ -71,13 +71,14 @@
         @applay(--shadow-none);
       }
     </style>
-    <iris-api-controller id="api"></iris-api-controller>
+
+    <iris-shared-entities id="shared" namespace="services"></iris-shared-entities>
     <paper-card heading$="{{heading}}">
       <div class="card-content">
         <div class="counter">
           <content select=".items-counter"></content>
         </div>
-        <paper-button class="btn-primary" on-click="openList" raised elevation="0">
+        <paper-button class="btn-primary" on-click="openList" raised elevation="0" disabled="[[!active]]">
           <content select=".button-name"></content>
         </paper-button>
       </div>
@@ -101,7 +102,8 @@
         is: 'iris-queuecard',
         properties: {
           heading: String,
-          tickets: Array
+          tickets: Array,
+          active: Boolean
         },
         ready() {
           this.row_model = [{
@@ -117,7 +119,7 @@
             field: 'service',
             transform: (ticket) => {
               let service_id = ticket.service;
-              return this.$.api.require('services').getService(service_id).service_label;
+              return this.$.shared.get(service_id).service_label;
             }
           }, {
             label: 'Число дел',
