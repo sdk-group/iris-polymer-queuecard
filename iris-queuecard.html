@@ -119,7 +119,7 @@
             field: 'service',
             transform: (ticket) => {
               let service_id = ticket.service;
-              return this.$.shared.get(service_id).service_label;
+              return this.$.shared.get(service_id).label;
             }
           }, {
             label: 'Число дел',
