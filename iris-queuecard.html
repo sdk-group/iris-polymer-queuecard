@@ -72,7 +72,6 @@
       }
     </style>
 
-    <iris-shared-entities id="shared" namespace="services"></iris-shared-entities>
     <paper-card heading$="{{heading}}">
       <div class="card-content">
         <div class="counter">
@@ -106,36 +105,6 @@
           active: Boolean
         },
         ready() {
-          this.row_model = [{
-            label: "Действие",
-            caption: "Принять",
-            name: 'process',
-            transform: 'action'
-          }, {
-            label: "№ талона",
-            field: 'label'
-          }, {
-            label: 'Услуга',
-            field: 'service',
-            transform: (ticket) => {
-              let service_id = ticket.service;
-              return this.$.shared.get(service_id).label;
-            }
-          }, {
-            label: 'Число дел',
-            field: 'service_count'
-          }, {
-            label: 'ФИО',
-            field: 'fio',
-            transform: function(ticket) {
-              return ticket.client.fio;
-            }
-          }, {
-            label: 'Время ожидания',
-            field: ['booking_date'],
-            transform: 'doomclock'
-          }];
-
           this.$.dialog.sizingTarget = app;
         },
         openList() {
