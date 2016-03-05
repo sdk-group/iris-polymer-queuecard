@@ -34,8 +34,7 @@
       paper-card {
         width: 100%;
         --paper-card-content: {
-          padding: 0;
-          padding-top: 16px;
+          padding: 16px 0 0 0;
         }
       }
       
@@ -47,7 +46,7 @@
       #dialog {
         width: 100%;
         top: 64px;
-        bottom: 0px;
+        bottom: 0;
         margin: 0;
         border-top: 3px solid #E44E34;
       }
@@ -85,10 +84,12 @@
 
     <paper-dialog id="dialog" entry-animation="slide-from-left-animation" exit-animation="slide-left-animation">
       <div class='dialog-head'>
-        <paper-fab class="flat" mini icon="chevron-left" elevation="0" on-click="closeList"> </paper-fab>
+        <paper-fab class="flat" mini icon="chevron-left" elevation="0" on-click="closeList"></paper-fab>
       </div>
       <paper-dialog-scrollable>
-        <iris-ticketlist id='ticketlist' tickets="[[tickets]]" row-model="[[row_model]]"></iris-ticketlist>
+        <iris-ticketlist id='ticketlist' tickets="[[tickets]]" row-model="[[row_model]]">
+          <content select=".list-caption"></content>
+        </iris-ticketlist>
       </paper-dialog-scrollable>
     </paper-dialog>
 
