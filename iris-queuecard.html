@@ -109,8 +109,9 @@
         },
         resizeDialog() {
           this.debounce('resize', () => {
+            // console.log('resize');
             this.$.dialog.notifyResize();
-          }, 500);
+          }, 300);
         },
         ready() {
           this.$.dialog.sizingTarget = app;
