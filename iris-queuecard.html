@@ -87,7 +87,7 @@
         <paper-fab class="flat" mini icon="chevron-left" elevation="0" on-click="closeList"></paper-fab>
       </div>
       <paper-dialog-scrollable>
-        <iris-ticketlist id='ticketlist' tickets="[[tickets]]" row-model="[[row_model]]">
+        <iris-ticketlist id='ticketlist' tickets="[[tickets]]" row-model="[[row_model]]" on-ticket-cell-restamp="resizeDialog">
           <content select=".list-caption"></content>
         </iris-ticketlist>
       </paper-dialog-scrollable>
@@ -102,8 +102,15 @@
         is: 'iris-queuecard',
         properties: {
           heading: String,
-          tickets: Array,
+          tickets: {
+            type: Array
+          },
           active: Boolean
+        },
+        resizeDialog() {
+          this.debounce('resize', () => {
+            this.$.dialog.notifyResize();
+          }, 500);
         },
         ready() {
           this.$.dialog.sizingTarget = app;
