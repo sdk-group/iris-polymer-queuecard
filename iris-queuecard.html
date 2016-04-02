@@ -86,11 +86,9 @@
       <div class='dialog-head'>
         <paper-fab class="flat" mini icon="chevron-left" elevation="0" on-click="closeList"></paper-fab>
       </div>
-      <paper-dialog-scrollable>
-        <iris-ticketlist id='ticketlist' tickets="[[tickets]]" row-model="[[row_model]]" on-ticket-cell-restamp="resizeDialog">
-          <content select=".list-caption"></content>
-        </iris-ticketlist>
-      </paper-dialog-scrollable>
+      <iris-ticketlist id='ticketlist' tickets="[[tickets]]" row-model="[[row_model]]" on-ticket-cell-restamp="resizeDialog">
+        <content select=".list-caption"></content>
+      </iris-ticketlist>
     </paper-dialog>
 
   </template>
