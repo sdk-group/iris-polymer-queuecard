@@ -16,7 +16,7 @@
         display: inline-block;
         --paper-card-header-color: #702c0c;
       }
-      
+
       .card-content paper-button {
         border-radius: 1px;
         border-top-left-radius: 0;
@@ -30,19 +30,19 @@
         box-shadow: none;
         width: 100%;
       }
-      
+
       paper-card {
         width: 100%;
         --paper-card-content: {
           padding: 16px 0 0 0;
         }
       }
-      
+
       .counter {
         float: right;
         clear: both;
       }
-      
+
       #dialog {
         width: 100%;
         top: 64px;
@@ -50,7 +50,7 @@
         margin: 0;
         border-top: 3px solid #E44E34;
       }
-      
+
       .dialog-head {
         text-align: left;
         font-size: 19px;
@@ -58,16 +58,12 @@
         position: relative;
         margin-top: 10px;
       }
-      
+
       paper-fab {
         border-radius: 3px;
         background-color: rgba(0, 0, 0, 0.0);
         border: 3px solid #6E4D44;
         color: #6E4D44;
-      }
-      
-      paper-fab.flat {
-        @applay(--shadow-none);
       }
     </style>
 
@@ -84,7 +80,7 @@
 
     <paper-dialog id="dialog" entry-animation="slide-from-left-animation" exit-animation="slide-left-animation">
       <div class='dialog-head'>
-        <paper-fab class="flat" mini icon="chevron-left" elevation="0" on-click="closeList"></paper-fab>
+        <paper-fab mini icon="chevron-left" elevation="0" on-click="closeList"></paper-fab>
       </div>
       <iris-ticketlist id='ticketlist' tickets="[[tickets]]" row-model="[[row_model]]" on-ticket-cell-restamp="resizeDialog">
         <content select=".list-caption"></content>
